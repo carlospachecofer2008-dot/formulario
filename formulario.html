@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Nuevo Producto - PlayStation</title>
+    <style>
+        /* Variables de color PlayStation */
+        :root {
+            --ps-blue: #0070d1; /* Azul principal de PlayStation */
+            --ps-dark-blue: #003791; /* Azul oscuro para detalles */
+            --ps-grey: #333; /* Gris oscuro para texto/fondo */
+            --ps-light-grey: #e0e0e0; /* Gris claro para fondos secundarios */
+            --ps-white: #ffffff; /* Blanco */
+            --ps-black: #000000; /* Negro */
+            --ps-text-light: #f0f0f0; /* Texto claro */
+            --ps-text-dark: #222; /* Texto oscuro */
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif; /* Fuente un poco más moderna */
+            background-color: var(--ps-dark-blue); /* Fondo azul oscuro general */
+            color: var(--ps-text-light); /* Color de texto general claro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: var(--ps-grey); /* Fondo principal del formulario gris oscuro */
+            padding: 35px 50px;
+            border-radius: 12px; /* Bordes más redondeados */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada */
+            width: 100%;
+            max-width: 850px; /* Un poco más ancho */
+            box-sizing: border-box;
+            border: 2px solid var(--ps-blue); /* Borde azul distintivo */
+        }
+        h2 {
+            text-align: center;
+            color: var(--ps-blue); /* Título en azul PlayStation */
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            letter-spacing: 1px; /* Espaciado para el título */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
+        p.subtitle {
+            text-align: center;
+            color: var(--ps-light-grey); /* Subtítulo en gris claro */
+            margin-bottom: 40px;
+            font-size: 1em;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group.two-cols {
+            display: flex;
+            gap: 25px;
+        }
+        .form-group.two-cols > div {
+            flex: 1;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--ps-white); /* Labels en blanco */
+            font-weight: bold;
+            font-size: 1em;
+            text-transform: uppercase; /* Mayúsculas para labels */
+            letter-spacing: 0.5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="date"],
+        input[type="time"],
+        input[type="url"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--ps-dark-blue); /* Borde azul oscuro */
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+            color: var(--ps-text-dark); /* Texto del input en oscuro */
+            background-color: var(--ps-light-grey); /* Fondo del input gris claro */
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--ps-blue); /* Borde azul al enfocar */
+            box-shadow: 0 0 0 3px rgba(0, 112, 209, 0.3); /* Sombra de enfoque azul */
+            outline: none;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        input::placeholder, textarea::placeholder {
+            color: #888; /* Placeholder un poco más oscuro */
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px 30px;
+            margin-top: 10px;
+        }
+        .radio-group div, .checkbox-group div {
+            display: flex;
+            align-items: center;
+        }
+        .radio-group input[type="radio"],
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+            accent-color: var(--ps-blue); /* Color de acento PlayStation azul */
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--ps-dark-blue);
+        }
+        .radio-group label, .checkbox-group label {
+            margin-bottom: 0;
+            font-weight: normal;
+            color: var(--ps-text-light); /* Labels de radio/checkbox en claro */
+            text-transform: none; /* No mayúsculas para estos */
+            letter-spacing: normal;
+        }
+        .color-picker {
+            display: flex;
+            align-items: center;
+            height: 44px; /* Ajustar altura para que se alinee con otros inputs */
+        }
+        .color-picker input[type="color"] {
+            width: 50px;
+            height: 40px;
+            padding: 0;
+            border: 2px solid var(--ps-dark-blue);
+            border-radius: 6px;
+            cursor: pointer;
+            background: none; /* Eliminar fondo predeterminado */
+        }
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .slider-group input[type="range"] {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            height: 10px;
+            background: var(--ps-dark-blue); /* Fondo del slider azul oscuro */
+            border-radius: 5px;
+            outline: none;
+        }
+        .slider-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--ps-blue); /* Thumb del slider azul PlayStation */
+            cursor: pointer;
+            border: 3px solid var(--ps-white); /* Borde blanco para el thumb */
+            box-shadow: 0 0 5px rgba(0,0,0,0.4);
+        }
+        .slider-group span {
+            color: var(--ps-white); /* Valor del slider en blanco */
+            font-weight: bold;
+            min-width: 30px;
+            text-align: right;
+        }
+        .file-upload {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            height: 44px; /* Altura para alinear */
+        }
+        .file-upload input[type="file"] {
+            display: none;
+        }
+        .file-upload label.button {
+            background-color: var(--ps-dark-blue); /* Botón de archivo azul oscuro */
+            color: var(--ps-white);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95em;
+            border: none;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .file-upload label.button:hover {
+            background-color: var(--ps-blue); /* Azul PlayStation al hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+        .file-upload span {
+            color: var(--ps-light-grey); /* Texto de archivo en gris claro */
+            font-size: 0.9em;
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .buttons-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
+        }
+        .buttons-group button {
+            padding: 12px 30px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+        .buttons-group button.clear-button {
+            background-color: #6c757d; /* Gris más oscuro */
+            color: var(--ps-white);
+        }
+        .buttons-group button.clear-button:hover {
+            background-color: #5a6268;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+        }
+        .buttons-group button.register-button {
+            background-color: var(--ps-blue); /* Botón principal en azul PlayStation */
+            color: var(--ps-white);
+        }
+        .buttons-group button.register-button:hover {
+            background-color: var(--ps-dark-blue); /* Azul oscuro al hover */
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Estilos específicos para el layout de la imagen */
+        .grid-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px 40px; /* Espacio entre filas y columnas */
+            margin-bottom: 25px;
+        }
+        .grid-section.full-width {
+            grid-template-columns: 1fr;
+        }
+        .grid-section.three-cols {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .grid-item.full-row {
+            grid-column: 1 / -1;
+        }
+        .field-label {
+            font-weight: bold;
+            color: var(--ps-white);
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px 30px;
+            }
+            .grid-section, .form-group.two-cols {
+                grid-template-columns: 1fr;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .buttons-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .buttons-group button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registro de Nuevo Producto</h2>
+        <p class="subtitle">Rellene el siguiente formulario para registrar un nuevo producto.</p>
+
+        <form>
+            <div class="grid-section">
+                <div class="grid-item">
+                    <label for="nombreProducto" class="field-label">Nombre del producto</label>
+                    <input type="text" id="nombreProducto" placeholder="Introduzca el nombre del producto">
+                </div>
+                <div class="grid-item">
+                    <label for="skuProducto" class="field-label">SKU del producto</label>
+                    <input type="text" id="skuProducto" placeholder="Introduzca el SKU del producto">
+                </div>
+                <div class="grid-item full-row">
+                    <label for="descripcionProducto" class="field-label">Descripción del producto</label>
+                    <textarea id="descripcionProducto" placeholder="Introduzca la descripción del producto"></textarea>
+                </div>
+            </div>
+
+            <div class="grid-section">
+                <div class="grid-item">
+                    <label class="field-label">Categoría del Producto</label>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="electronica" name="categoria" value="electronica" checked>
+                            <label for="electronica">Electrónica</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="ropa" name="categoria" value="ropa">
+                            <label for="ropa">Ropa</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="hogarJardin" name="categoria" value="hogar-jardin">
+                            <label for="hogarJardin">Hogar y Jardín</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <label for="fabricanteProveedor" class="field-label">Fabricante / Proveedor</label>
+                    <select id="fabricanteProveedor">
+                        <option value="fabricanteA">Fabricante A</option>
+                        <option value="fabricanteB">Fabricante B</option>
+                        <option value="fabricanteC">Fabricante C</option>
+                    </select>
+                    <label class="field-label" style="margin-top: 25px;">Opciones</label>
+                    <div class="checkbox-group">
+                        <div>
+                            <input type="checkbox" id="productoDestacado" name="opciones" value="destacado">
+                            <label for="productoDestacado">Producto destacado</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="disponibleEnvio" name="opciones" value="envio">
+                            <label for="disponibleEnvio">Disponible para envío</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-section three-cols">
+                <div class="grid-item">
+                    <label for="fechaLanzamiento" class="field-label">Fecha de lanzamiento</label>
+                    <input type="date" id="fechaLanzamiento" value="2023-10-26">
+                </div>
+                <div class="grid-item">
+                    <label for="horaOferta" class="field-label">Hora de oferta especial</label>
+                    <input type="time" id="horaOferta">
+                </div>
+                <div class="grid-item">
+                    <label for="colorPrincipal" class="field-label">Color principal</label>
+                    <div class="color-picker">
+                        <input type="color" id="colorPrincipal" value="#0070d1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-section">
+                <div class="grid-item">
+                    <label for="cantidadStock" class="field-label">Cantidad en stock</label>
+                    <input type="number" id="cantidadStock" value="0" min="0">
+                </div>
+                <div class="grid-item">
+                    <label for="calidadProducto" class="field-label">Calidad del producto</label>
+                    <div class="slider-group">
+                        <input type="range" id="calidadProducto" min="0" max="100" value="75">
+                        <span id="calidadValue">75</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-section">
+                <div class="grid-item">
+                    <label for="urlProducto" class="field-label">URL del producto</label>
+                    <input type="url" id="urlProducto" placeholder="https://ejemplo.com">
+                </div>
+                <div class="grid-item">
+                    <label for="emailSoporte" class="field-label">Email de soporte</label>
+                    <input type="email" id="emailSoporte" placeholder="soporte@ejemplo.com">
+                </div>
+                <div class="grid-item">
+                    <label for="telefonoContacto" class="field-label">Teléfono de contacto</label>
+                    <input type="tel" id="telefonoContacto" placeholder="123-456-7890">
+                </div>
+            </div>
+
+            <div class="grid-section">
+                <div class="grid-item">
+                    <label for="buscarEtiquetas" class="field-label">Buscar etiquetas</label>
+                    <input type="text" id="buscarEtiquetas" placeholder="Buscar...">
+                </div>
+                <div class="grid-item">
+                    <label for="imagenesProducto" class="field-label">Imágenes del producto</label>
+                    <div class="file-upload">
+                        <input type="file" id="imagenesProducto" multiple>
+                        <label for="imagenesProducto" class="button">Elegir archivos</label>
+                        <span>Ningún archivo seleccionado</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons-group">
+                <button type="reset" class="clear-button">Limpiar Formulario</button>
+                <button type="submit" class="register-button">Registrar Producto</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Script para actualizar el valor del slider de calidad
+        const calidadProducto = document.getElementById('calidadProducto');
+        const calidadValue = document.getElementById('calidadValue');
+        calidadProducto.addEventListener('input', () => {
+            calidadValue.textContent = calidadProducto.value;
+        });
+
+        // Script para mostrar el nombre del archivo seleccionado
+        const imagenesProducto = document.getElementById('imagenesProducto');
+        const fileSpan = imagenesProducto.nextElementSibling.nextElementSibling; // El span es el segundo hermano después del label
+
+        imagenesProducto.addEventListener('change', () => {
+            if (imagenesProducto.files.length > 0) {
+                if (imagenesProducto.files.length === 1) {
+                    fileSpan.textContent = imagenesProducto.files[0].name;
+                } else {
+                    fileSpan.textContent = `${imagenesProducto.files.length} archivos seleccionados`;
+                }
+            } else {
+                fileSpan.textContent = 'Ningún archivo seleccionado';
+            }
+        });
+    </script>
+</body>
+</html>
